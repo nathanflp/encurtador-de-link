@@ -21,7 +21,7 @@ The API was developed for the Back-End Brasil challenge, wich you can find it [h
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/nathanflp/bossabox_desafio
+git clone https://github.com/nathanflp/encurtador-de-link
 ```
 
 2. Install dependencies with Maven
