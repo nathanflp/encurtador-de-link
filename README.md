@@ -40,13 +40,10 @@ The API provides the following endpoints:
 ```markdown
 List of all detailed endpoints - http://localhost:8080/swagger-ui.html
 
-GET /tools - Retrieve a list of all tools.
+GET /{id} - Redirects to the registered url.
 
-GET /tools/tag?tag={tag} - Retrive a list of all tools that include a certain tag
+POST /encurtar-url - Shorten the received url .
 
-POST /tools - Register a new tool.
-
-DELETE /tools/{id} - Delete a tool by id.
 ```
 
 ## Database
