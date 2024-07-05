@@ -21,6 +21,7 @@ public class linkParaEncurtarService {
     public String cadastraLink(linkEncurtadoRequest request){
 
         String id;
+
         do {
             id = RandomStringUtils.randomAlphanumeric(5, 10);
         } while (repository.existsById(id));
@@ -41,5 +42,8 @@ public class linkParaEncurtarService {
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create(url.get().getFullUrl()));
         return headers;
+    }
+    public boolean isLinkEligible(String id){
+        return repository.existsById(id);
     }
 }
