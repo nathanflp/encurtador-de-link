@@ -26,7 +26,7 @@ public class linkParaEncurtarController {
     @GetMapping("{id}")
     public ResponseEntity<Void> redirect(@PathVariable("id") String id) {
 
-        if(!service.isLinkEligible(id)){
+        if(!service.doesLinkAlreadyExist(id)){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
 
