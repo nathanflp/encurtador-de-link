@@ -4,7 +4,6 @@ import br.com.encurtadordeurl.nathanflp.controller.dto.linkEncurtadoRequest;
 import br.com.encurtadordeurl.nathanflp.models.linkParaEncurtar;
 import br.com.encurtadordeurl.nathanflp.repository.linkParaEncurtarRepository;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +12,8 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
-public class linkParaEncurtarService {
+public record linkParaEncurtarService(linkParaEncurtarRepository repository) {
 
-    @Autowired
-    linkParaEncurtarRepository repository;
 
     public String cadastraLink(linkEncurtadoRequest request){
 
@@ -24,7 +21,7 @@ public class linkParaEncurtarService {
 
         do {
             id = RandomStringUtils.randomAlphanumeric(5, 10);
-        } while (repository.existsById(id));
+        } while (doesLinkAlreadyExist(id));
 
         repository.save(new linkParaEncurtar(id, request.url(), LocalDateTime.now().plusDays(3)));
 
@@ -41,9 +38,11 @@ public class linkParaEncurtarService {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(URI.create(url.get().getFullUrl()));
+
         return headers;
     }
-    public boolean isLinkEligible(String id){
+
+    public boolean doesLinkAlreadyExist(String id){
         return repository.existsById(id);
     }
 }
