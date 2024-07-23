@@ -7,7 +7,7 @@
 
 This project is an API built using **Java, Java Spring and PostgresSQL as the database.**
 
-The API was developed for the Back-End Brasil challenge, wich you can find it [here](https://github.com/backend-br/desafios/blob/master/url-shortener/PROBLEM.md).
+The API was developed for the Back-End Brasil challenge, which you can find it [here](https://github.com/backend-br/desafios/blob/master/url-shortener/PROBLEM.md).
 
 ## Table of Contents
 
