@@ -1,0 +1,17 @@
+spring:
+    application:
+        name: nathanflp
+    datasource:
+        url: jdbc:postgresql://localhost:5432/encurtaurl
+        username: dev
+        password: 123
+        platform: postgres
+    jpa:
+        show-sql: true
+        hibernate:
+            format_sql: true
+            ddl-auto: update
+
+link:
+    expiration:
+        days: 5
