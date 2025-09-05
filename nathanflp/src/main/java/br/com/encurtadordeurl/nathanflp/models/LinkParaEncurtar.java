@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import org.springframework.cglib.core.*;
 
 import java.time.*;
+import java.util.*;
 
 
 @Entity
@@ -16,8 +17,8 @@ public class LinkParaEncurtar {
     @Column(name = "full_url")
     private String fullUrl;
 
-    @Column(name = "created_at")
-    private final LocalDateTime createdAt = LocalDateTime.now();
+    @Column(name = "created_at", updatable = false, nullable = false)
+    private  LocalDateTime createdAt;
 
     @Column(name = "expires_at")
     private LocalDateTime expiresAt;
@@ -73,8 +74,25 @@ public class LinkParaEncurtar {
         return lastTimeClicked;
     }
 
-    public void LocalDateTime(LocalDateTime lastTimeClicked) {
+    public void setLastTimeClicked(LocalDateTime lastTimeClicked) {
         this.lastTimeClicked = lastTimeClicked;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        LinkParaEncurtar that = (LinkParaEncurtar) o;
+        return Objects.equals(id, that.id) && Objects.equals(fullUrl, that.fullUrl) && Objects.equals(createdAt, that.createdAt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, fullUrl, createdAt);
+    }
+
+    @PrePersist
+    public void prePersist() {
+        this.createdAt = LocalDateTime.now();
     }
 
     public void increaseClickCount() {
