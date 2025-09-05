@@ -1,0 +1,11 @@
+services:
+  db:
+    image: postgres:13-alpine
+    container_name: encurtaUrl-db
+    restart: always
+    environment:
+      POSTGRES_DB: encurtaurl
+      POSTGRES_USER: dev
+      POSTGRES_PASSWORD: 123
+    ports:
+      - "5432:5432"
