@@ -45,4 +45,16 @@ public record linkParaEncurtarService(linkParaEncurtarRepository repository) {
     public boolean doesLinkAlreadyExist(String id){
         return repository.existsById(id);
     }
+
+    public LinkMetricsResponse metricsResponse(String id){
+        log.info("Buscando url por id: " + id);
+        LinkParaEncurtar link = repository.findById(id).orElseThrow(() -> new RuntimeException("Link informado não existe nos nossos registros."));
+        log.info("Url encontrada");
+        log.info("Gerando novo linkMetricsReponse para id: " + link.getId());
+
+        return new LinkMetricsResponse(link.getId(),
+                link.getClickCount(),
+                DateTimeFormatterUtil.format(link.getExpiresAt()));
+    }
+
 }
