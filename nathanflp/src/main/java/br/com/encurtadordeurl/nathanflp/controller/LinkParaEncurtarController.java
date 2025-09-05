@@ -8,6 +8,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping(value = "v1")
 public class LinkParaEncurtarController {
 
     private final LinkParaEncurtarService service;
@@ -19,10 +20,9 @@ public class LinkParaEncurtarController {
 
     @PostMapping(value = "/encurtar-url")
     public ResponseEntity<LinkParaEncurtarResponse> shortenUrl(@RequestBody LinkEncurtadoRequest request, HttpServletRequest servletRequest) {
-        String shortUrl = service.cadastraLink(request, servletRequest.getRequestURL().toString());
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(new LinkParaEncurtarResponse(shortUrl));
+                .body(service.cadastraLink(request, servletRequest.getRequestURL().toString()));
     }
 
     @GetMapping("{id}")

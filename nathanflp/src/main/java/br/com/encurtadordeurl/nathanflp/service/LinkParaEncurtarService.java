@@ -26,7 +26,7 @@ public class LinkParaEncurtarService {
         this.repository = repository;
     }
 
-    public String cadastraLink(LinkEncurtadoRequest request, String baseUrl){
+    public LinkParaEncurtarResponse cadastraLink(LinkEncurtadoRequest request, String baseUrl){
         String redirectedUrlId;
 
         log.info("Iniciando a geracao de id");
@@ -37,7 +37,7 @@ public class LinkParaEncurtarService {
         log.info("Id gerado: " + redirectedUrlId + ". Salvando no banco."  );
         repository.save(new LinkParaEncurtar(redirectedUrlId, request.url(), LocalDateTime.now().plusDays(expirationTime)));
 
-        return baseUrl.replace("encurtar-url", redirectedUrlId);
+        return new LinkParaEncurtarResponse(baseUrl.replace("encurtar-url", redirectedUrlId));
     }
 
     public HttpHeaders redirecionaURL(String id ){
