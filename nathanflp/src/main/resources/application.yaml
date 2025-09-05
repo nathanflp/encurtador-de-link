@@ -14,4 +14,4 @@ spring:
 
 link:
     expiration:
-        days: 5
+        days: ${expirationValue:3}
