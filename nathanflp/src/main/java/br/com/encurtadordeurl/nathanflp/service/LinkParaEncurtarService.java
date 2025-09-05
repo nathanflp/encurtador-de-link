@@ -4,6 +4,7 @@ import br.com.encurtadordeurl.nathanflp.controller.dto.*;
 import br.com.encurtadordeurl.nathanflp.models.*;
 import br.com.encurtadordeurl.nathanflp.repository.*;
 import br.com.encurtadordeurl.nathanflp.utils.*;
+import jakarta.transaction.*;
 import org.apache.commons.lang3.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
@@ -26,6 +27,7 @@ public class LinkParaEncurtarService {
         this.repository = repository;
     }
 
+    @Transactional
     public LinkParaEncurtarResponse cadastraLink(LinkEncurtadoRequest request, String baseUrl){
         String redirectedUrlId;
 
@@ -40,6 +42,7 @@ public class LinkParaEncurtarService {
         return new LinkParaEncurtarResponse(baseUrl.replace("encurtar-url", redirectedUrlId));
     }
 
+    @Transactional
     public HttpHeaders redirecionaURL(String id ){
         log.info("Iniciando redirecionamento de id: " + id);
         LinkParaEncurtar url = repository.findById(id)
@@ -60,6 +63,7 @@ public class LinkParaEncurtarService {
     public boolean doesLinkAlreadyExist(String id){
         return repository.existsById(id);
     }
+
 
     public LinkMetricsResponse metricsResponse(String id){
         log.info("Iniciando coleta de metrica para id: " + id);
